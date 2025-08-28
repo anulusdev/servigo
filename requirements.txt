@@ -1,0 +1,8 @@
+crispy-bootstrap5==2025.4
+Django==5.2.5
+django-crispy-forms==2.4
+django-fsm==3.0.0
+gunicorn==23.0.0
+psycopg2-binary==2.9.10
+sqlparse==0.5.3
+whitenoise==6.9.0

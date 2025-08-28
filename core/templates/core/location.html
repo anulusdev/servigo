@@ -1,0 +1,16 @@
+{% extends 'core/base.html' %} {# Tempalate's tags #}
+{% load crispy_forms_tags%}
+{% block content %}
+    <div class="content-section">
+        <form method="POST", action="{% url 'location' %}">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <h1 class="border-bottom mb-4">Input Location</h1>
+                {{ form|crispy }} {# variable #}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Input</button>
+            </div>
+        </form>
+    </div>
+{% endblock%}

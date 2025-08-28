@@ -1,0 +1,116 @@
+{% extends 'core/base.html' %} {# Tempalate's tags #}
+{% load crispy_forms_tags%}
+{% block content %}
+    <head>
+        <meta charset="UTF-8">
+        <title>Available Trips</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background: burlywood;
+                margin: 0;
+                padding: 20px;
+                background-color: bisque
+            }
+
+            h2 {
+                text-align: center;
+                margin-bottom: 20px;
+                color: #333;
+            }
+
+            .trip-list {
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 0;
+                list-style: none;
+            }
+
+            .trip-item {
+                background: linear-gradient(135deg, #20e24a, #dae018);
+                border: 1px solid #ddd;
+                border-radius: 15px;
+                padding: 15px 15px;
+                position: relative;
+                margin-bottom: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                box-shadow: 0px 3px 5px rgba(0,0,0,0.1);
+                transition: transform 0.2s ease-in-out;
+            }
+
+            .trip-item:hover {
+                transform: scale(1.02);
+            }
+
+            .trip-info {
+                display: flex;
+                align-items: center;
+                gap: 30px;
+            }
+
+            .trip-name {
+                font-size: 18px;
+                font-weight: bold;
+                color: #222;
+            }
+
+            .trip-count {
+                font-size: 14px;
+                color: #666;
+            }
+
+            .status-badge {
+                padding: 4px 10px;
+                border-radius: 12px;
+                font-size: 12px;
+                font-weight: bold;
+            }
+
+            .status-open {
+                background: bisque;
+                color: #1a7f37;
+            }
+
+            .status-completed {
+                background: #ffe0e0;
+                color: #c62828;
+            }
+        </style>
+    </head>
+    <body>
+
+        <center class="row">
+            <h1><i>AVAILABLE TRIPS</i></h1>
+            <hr />
+          </center>
+        
+
+        <ul class="trip-list">
+            {% for trip in trips %}
+            <li class="trip-item">
+                <div class="trip-info">
+                  <div>
+                    <div
+                        class="trip-locations__faculty" <small>📍</small>
+                        <h3>{{ trip.locations__faculty }}</h3>
+                    </div>
+                    <div> {{ trip.status}} </div>
+                    <div class="trip-count">{{ trip.num_students }} seat(s)  of 3 booked</div>
+                    <a href="{% url 'location' %}?trip__faculty={{ trip.location__faculty }}" style="
+                        position: absolute; right: 10px; bottom: 10px; padding: 5px 10px; background:peru; 
+                        color: white; border-radius: 8px; font-weight: bold; text-decoration: none;">
+                        Join Trip
+                    </a>
+                  </div>
+                </div>
+            </li>
+            {% empty %}
+            <h3>OHH! sorry, No trips available.</h3>
+            {% endfor %}
+        </ul>
+
+    </body>
+    </html>
+{% endblock%}

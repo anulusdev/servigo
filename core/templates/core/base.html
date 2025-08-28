@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- THE CSS -->
+	<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" >
+
+    <link rel="stylesheet" type="text/css" href="{% static 'core/main.css'%}">
+    <!-- CSS END -->
+
+	{% if title %}
+		<title>SERVIGO - {{ title }}</title>
+	{% else %}
+		<title>SERVIGO</title>
+	{% endif %}
+</head>
+<body>
+	<!-- NAVBAR -->
+	<header class="site-header">
+	  <nav class="navbar navbar-expand-lg  navbar-dark bg-dark fixed-top">
+	    <div class="container">
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+	      <span class="navbar-toggler-icon"></span>
+	      </button>
+	      <div class="collapse navbar-collapse" id="navbarToggle">
+	        <div class="navbar-nav mr-auto">
+	          <a class="nav-item nav-link" href="{% url 'home' %}">Home</a>
+	        </div>
+	        <!-- Navbar Right Side -->
+			<div class="navbar-nav">
+				{% if user.is_authenticated %}
+					<a class="nav-item nav-link" href="{% url 'profile' %}">profile</a>
+					<form action="{% url 'logout' %}" method="post">
+    					{% csrf_token %}
+    					<button type="submit" class="btn btn-outline-light">Logout</button>
+					</form>
+				{%  else %}
+					<a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+					<a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+				{% endif %}
+			</div>
+	      </div>
+	    </div>
+	  </nav>
+	</header>
+	<!-- NAVBAR ENDS -->
+
+	<!-- MAIN -->
+	<main role="main" class="container">
+	  <div class="row">
+	    <div class="col-md-8">
+	    	{% if messages %}
+	    		{% for message in messages %}
+	    			<div class="alert alert-{{ message.tags }}">
+	    				{{ message }}
+	    			</div>
+	    		{% endfor %}
+	    	{% endif %}
+	    	{% block content %}{% endblock %}
+	    </div>
+	    <div class="col-md-4">
+	      <div class="content-section">
+	        <h3>Our Sidebar</h3>
+	        <p class='text-muted'>You can put any information here you'd like.
+	          <ul class="list-group">
+	            <li class="list-group-item list-group-item-light">Latest Posts</li>
+	            <li class="list-group-item list-group-item-light">Announcements</li>
+	            <li class="list-group-item list-group-item-light">Calendars</li>
+	            <li class="list-group-item list-group-item-light">etc</li>
+	          </ul>
+	        </p>
+	      </div>
+	    </div>
+	  </div>
+	</main>
+	<!-- MAIN ENDS -->
+
+	<!-- JS -->
+	<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+    <!-- JS ENDS -->
+</body>
+</html>

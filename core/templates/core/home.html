@@ -1,0 +1,30 @@
+{% extends 'core/base.html' %}
+
+{% block content%}
+    {% if user.is_authenticated %}
+        <h1 class="mb-4">Hey {{user.username}}!. Welcome to SERVIGO🏡</h1>
+    {% else %}
+        <h1 class="mb-4">Hello! Welcome to SERVIGO🏡</h1>
+    {% endif %}
+        <a href="{% url 'location' %}"
+            style="
+            position: relative; right: 2px; bottom: 10px; padding: 5px 10px; 
+            color: rgb(70, 155, 212); border-radius: 10px; font-weight: bold; text-decoration: none;">
+            BOOK A RIDE</a>
+
+        <a href="{% url 'open_trips' %}"
+            style="
+            position: relative; right: 2px; bottom: 10px; padding: 5px 10px; 
+            color: rgb(70, 155, 212); border-radius: 10px; font-weight: bold; text-decoration: none;"> 
+            VIEW AVAILABLE TRIPS
+        </a>
+{% endblock %}
+
+
+
+
+<!-- 
+<form class="search-box">
+        <input type="text" class="form-control mb-3" placeholder="Search for help or service...">
+        <button class="btn btn-primary w-100" type="submit">Search</button>
+    </form> -->
